@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\frede\\source\\repos\\PoC\\PoC\\PoC.csproj": {}
+    "C:\\Users\\frede\\OneDrive\\Dokumenter\\GitHub\\PoC\\PoC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\frede\\source\\repos\\PoC\\PoC\\PoC.csproj": {
+    "C:\\Users\\frede\\OneDrive\\Dokumenter\\GitHub\\PoC\\PoC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\frede\\source\\repos\\PoC\\PoC\\PoC.csproj",
+        "projectUniqueName": "C:\\Users\\frede\\OneDrive\\Dokumenter\\GitHub\\PoC\\PoC.csproj",
         "projectName": "PoC",
-        "projectPath": "C:\\Users\\frede\\source\\repos\\PoC\\PoC\\PoC.csproj",
+        "projectPath": "C:\\Users\\frede\\OneDrive\\Dokumenter\\GitHub\\PoC\\PoC.csproj",
         "packagesPath": "C:\\Users\\frede\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\frede\\source\\repos\\PoC\\PoC\\obj\\",
+        "outputPath": "C:\\Users\\frede\\OneDrive\\Dokumenter\\GitHub\\PoC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\frede\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,32 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Configuration.FileExtensions": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

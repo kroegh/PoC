@@ -1,22 +1,40 @@
-﻿using System;
+﻿using PoC.Commands;
+using PoC.DAL;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
-using WpfMVVM.Commands;
+using System.Threading.Tasks;
 
 namespace PoC.ViewModels
 {
-    class MainWindowViewModel
+    public class MainWindowViewModel: ViewModelBase
     {
         public RelayCommand ClearSqlQueryCommand { get; private set; }
         public RelayCommand ClearFilterCommand { get; private set; }
         public RelayCommand ClearFilterByIdCommand { get; private set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private string sqlQueryString = string.Empty;
-        private string filterString = string.Empty;
-        private string filterByIdString = string.Empty;
+        private IEnumerable<object> dataSet = new ObservableCollection<object>();
+        private string sqlQueryString;
+        private string filterString;
+        private string filterByIdString;
+
+        public IEnumerable<object> DataSet
+        {
+            get
+            {
+                return dataSet;
+            }
+            set
+            {
+                dataSet = value;
+                OnPropertyChanged(nameof(DataSet));
+            }
+        }
+
         public string SqlQueryString
         {
             get
@@ -61,11 +79,9 @@ namespace PoC.ViewModels
             ClearSqlQueryCommand = new RelayCommand(ClearSqlQuery, CanClearSqlQuery);
             ClearFilterCommand = new RelayCommand(ClearFilter, CanClearFilter);
             ClearFilterByIdCommand = new RelayCommand(ClearFilterById, CanClearFilterById);
-        }
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            DataAccess db = new DataAccess();
+            string query = "select * from employees";
+            DataSet = db.GetEmployees(query);
         }
 
         public void ClearSqlQuery(object parameter)
