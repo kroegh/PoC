@@ -61,3 +61,4 @@ C:\Users\frede\OneDrive\Dokumenter\GitHub\PoC\obj\Debug\netcoreapp3.1\PoC.csproj
 C:\Users\frede\OneDrive\Dokumenter\GitHub\PoC\obj\Debug\netcoreapp3.1\PoC.dll
 C:\Users\frede\OneDrive\Dokumenter\GitHub\PoC\obj\Debug\netcoreapp3.1\PoC.pdb
 C:\Users\frede\OneDrive\Dokumenter\GitHub\PoC\obj\Debug\netcoreapp3.1\PoC.genruntimeconfig.cache
+C:\Users\frede\OneDrive\Dokumenter\GitHub\PoC\obj\Debug\netcoreapp3.1\PoC.csproj.AssemblyReference.cache

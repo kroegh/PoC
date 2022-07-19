@@ -15,9 +15,9 @@ namespace PoC.DAL
     public class DataAccess
     {
         public string dbName = "TestDB";
-        public IEnumerable<object> GetEmployees(string country)
+        public DataTable GetEmployees(string query)
         {
-            //DataTable dt = new DataTable();
+            DataTable dt = new DataTable();
             //foreach (Window window in Application.Current.Windows)
             //{
             //    if (window.GetType() == typeof(MainWindow))
@@ -25,26 +25,28 @@ namespace PoC.DAL
             //        dbName = (window as MainWindow).DatabaseComboBox.SelectedValue.ToString();
             //    }
             //}
-            using (var connection = new SqlConnection(Helper.CnnVal(dbName)))
+            //using (var connection = new SqlConnection(Helper.CnnVal(dbName)))
+            //{
+            //    string pattern = @"(?<= from\s).*(?=\swhere)";
+
+            //    string TableName = Regex.Match(query, pattern).Value;
+
+
+            //    var q =
+            //    from a in connection.Query<object>(query)
+            //    select a;
+
+            //    return q;
+            var connection = new SqlConnection(Helper.CnnVal(dbName));
+            using (SqlDataAdapter da = new SqlDataAdapter(query, connection))
             {
-                string pattern = @"(?<= from\s).*(?=\swhere)";
-
-                string TableName = Regex.Match(country, pattern).Value;
-
-                var q =
-                from a in connection.Query<object>(country)
-                select a;
-
-                return q;
-                //using (SqlDataAdapter da = new SqlDataAdapter(country, connection = new SqlConnection(Helper.CnnVal(dbName))))
-                //{
-                //da.Fill(dt);
-                //return dt;
-                //}
-                //}
-
+                da.Fill(dt);
+                return dt;
             }
-        }
+            }
+
+        //}
+        //}
 
         public DataTable GetDbSchema()
         {

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using PoC.ViewModels;
+using System.Windows;
 
 namespace PoC
 {
