@@ -1,18 +1,10 @@
 ﻿using PoC.Commands;
 using PoC.DAL;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace PoC.ViewModels
 {
@@ -24,6 +16,7 @@ namespace PoC.ViewModels
         public RelayCommand ClearFilterByIdCommand { get; private set; }
         public RelayCommand FilterCommand { get; private set; }
         public RelayCommand FilterByIdCommand { get; private set; }
+        public RelayCommand SelectDbCommand { get; private set; }
 
         private DataView dataSet;
         private string sqlQueryString;
@@ -35,6 +28,7 @@ namespace PoC.ViewModels
         {
             get { return this; }
         }
+
         public DataView DataSet
         {
             get
@@ -136,8 +130,19 @@ namespace PoC.ViewModels
 
         public void ExecuteQuery(object parameter)
         {
+            string dbName = "";
+            foreach (var collection in Items)
+            {
+                foreach (var item in collection.Children)
+                {
+                    if (item.IsSelected)
+                    {
+                        dbName = item.Name;
+                    }
+                }
+            }
             DataAccess da = new DataAccess();
-            DataTable dt = da.GetEmployees(sqlQueryString);
+            DataTable dt = da.GetEmployees(sqlQueryString, dbName);
             DataSet = dt.DefaultView;
             unfilteredDT = dt;
 
@@ -152,7 +157,7 @@ namespace PoC.ViewModels
         {
             DataTable dt;
             var rows = from a in unfilteredDT.AsEnumerable()
-                       where string.Join(",", a.ItemArray).Contains(FilterString)
+                       where string.Join(",", a.ItemArray).ToLower().Contains(FilterString.ToLower())
                        select a;
             dt = rows.CopyToDataTable();
             DataSet = dt.DefaultView;
@@ -199,23 +204,23 @@ namespace PoC.ViewModels
 
                 IEnumerable<string> databases = GetNameList(databasesSchemaTable.Rows, 0);
 
-                foreach (string dbName in databases)
-                {
-                    var dbNode = new NodeViewModel { Name = dbName };
-                    rootNode.Children.Add(dbNode);
-                    //if (dbName.Equals("TestDB"))
-                    //{
-                    //    DataTable table = connection.GetSchema("Tables");
-                    //    IEnumerable<string> tables = GetNameList(table.Rows, 2);
+                //foreach (string dbName in databases)
+                //{
+                //    var dbNode = new NodeViewModel { Name = dbName };
+                //    rootNode.Children.Add(dbNode);
+                //    if (dbName.Equals("TestDB"))
+                //    {
+                //        DataTable table = connection.GetSchema("Tables");
+                //        IEnumerable<string> tables = GetNameList(table.Rows, 2);
 
-                    //    var tableNode = new NodeViewModel { Name = "Tables" };
-                    //    dbNode.Children.Add(tableNode);
-                    //    foreach (string tableName in tables)
-                    //    {
-                    //        tableNode.Children.Add(new NodeViewModel { Name = tableName });
-                    //    }
-                    //}
-                }
+                //        var tableNode = new NodeViewModel { Name = "Tables" };
+                //        dbNode.Children.Add(tableNode);
+                //        foreach (string tableName in tables)
+                //        {
+                //            tableNode.Children.Add(new NodeViewModel { Name = tableName });
+                //        }
+                //    }
+                //}
             }
         }
 
@@ -223,7 +228,6 @@ namespace PoC.ViewModels
         {
             return drc.Cast<DataRow>().Select(r => r.ItemArray[index].ToString()).OrderBy(r => r).ToList();
         }
-
         public ObservableCollection<NodeViewModel> Items { get; set; }
     }
 }

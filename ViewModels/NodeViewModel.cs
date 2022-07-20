@@ -16,6 +16,10 @@ namespace PoC.ViewModels
         {
             Children = new ObservableCollection<NodeViewModel>();
         }
+
+        static NodeViewModel()
+        {
+        }
         public string Id { get; set; }
         public string Name { get; set; }
         public ObservableCollection<NodeViewModel> Children { get; set; }
@@ -31,7 +35,6 @@ namespace PoC.ViewModels
             {
                 isSelected = value;
                 OnPropertyChanged(nameof(IsSelected));
-                Debug.WriteLine(Name);
             }
         }
     }

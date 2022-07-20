@@ -21,11 +21,16 @@
             <TreeView.ItemContainerStyle>
                 <Style TargetType="TreeViewItem">
                     <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                    <Setter Property="IsExpanded" Value="True"/>
                 </Style>
             </TreeView.ItemContainerStyle>
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type viewModels:NodeViewModel}" ItemsSource="{Binding Children}">
-                    <TextBlock Text="{Binding Name}"></TextBlock>
+                    <TextBlock Text="{Binding Name}">
+                        <TextBlock.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                 </HierarchicalDataTemplate>
             </TreeView.Resources>
         </TreeView>

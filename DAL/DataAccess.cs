@@ -15,7 +15,7 @@ namespace PoC.DAL
     public class DataAccess
     {
         public string dbName = "TestDB";
-        public DataTable GetEmployees(string query)
+        public DataTable GetEmployees(string query, string db)
         {
             DataTable dt = new DataTable();
             //foreach (Window window in Application.Current.Windows)
@@ -37,7 +37,7 @@ namespace PoC.DAL
             //    select a;
 
             //    return q;
-            var connection = new SqlConnection(Helper.CnnVal(dbName));
+            var connection = new SqlConnection(Helper.CnnVal(db));
             using (SqlDataAdapter da = new SqlDataAdapter(query, connection))
             {
                 da.Fill(dt);
