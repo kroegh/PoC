@@ -204,23 +204,23 @@ namespace PoC.ViewModels
 
                 IEnumerable<string> databases = GetNameList(databasesSchemaTable.Rows, 0);
 
-                //foreach (string dbName in databases)
-                //{
-                //    var dbNode = new NodeViewModel { Name = dbName };
-                //    rootNode.Children.Add(dbNode);
-                //    if (dbName.Equals("TestDB"))
-                //    {
-                //        DataTable table = connection.GetSchema("Tables");
-                //        IEnumerable<string> tables = GetNameList(table.Rows, 2);
+                foreach (string dbName in databases)
+                {
+                    var dbNode = new NodeViewModel { Name = dbName };
+                    rootNode.Children.Add(dbNode);
+                    //    if (dbName.Equals("TestDB"))
+                    //    {
+                    //        DataTable table = connection.GetSchema("Tables");
+                    //        IEnumerable<string> tables = GetNameList(table.Rows, 2);
 
-                //        var tableNode = new NodeViewModel { Name = "Tables" };
-                //        dbNode.Children.Add(tableNode);
-                //        foreach (string tableName in tables)
-                //        {
-                //            tableNode.Children.Add(new NodeViewModel { Name = tableName });
-                //        }
-                //    }
-                //}
+                    //        var tableNode = new NodeViewModel { Name = "Tables" };
+                    //        dbNode.Children.Add(tableNode);
+                    //        foreach (string tableName in tables)
+                    //        {
+                    //            tableNode.Children.Add(new NodeViewModel { Name = tableName });
+                    //        }
+                    //    }
+                }
             }
         }
 

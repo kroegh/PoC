@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
-         <viewModels:MainWindowViewModel/>
+        <viewModels:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -55,10 +55,9 @@
                 <TextBox Text="{Binding FilterByIdString}" Grid.Row="0" Height="30" Width="100"/>
                 <Button Content="Filter" Margin="10 0 0 0" Padding="5 0" Command="{Binding FilterByIdCommand}"/>
                 <Button Content="Clear" Margin="10 0 0 0" Padding="5 0" Command="{Binding ClearFilterByIdCommand}"/>
+
             </StackPanel>
             <DataGrid Grid.Row="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" BorderThickness="0 1 1 1" ItemsSource="{Binding DataSet, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
         </Grid>
-        
-        
     </Grid>
 </Window>
